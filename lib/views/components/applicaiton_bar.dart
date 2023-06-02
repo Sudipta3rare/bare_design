@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:line_icons/line_icon.dart';
 
 import '../../utils/appColors.dart';
 
@@ -50,6 +53,7 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             icon: const Icon(
               Icons.arrow_back,
+              color: AppColors.buttonColor,
             ),
             onPressed: () => Navigator.pop(context),
           ),
@@ -69,7 +73,7 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
             icon: const Icon(
               Icons.arrow_back,
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Get.back(),
           ),
       centerTitle: centerTitle!,
       title: logo ?? titleWidget ??
@@ -79,19 +83,25 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
           ),
       elevation: elevation,
       actions: [
-        logoutOnTap != null
-            ? IconButton(
-          icon: SvgPicture.asset(
-            // 'assets/icons/logout_icon.svg',
-              "",
-            width: Dimens.iconSize,
-          ),
-          color: AppColors.iconActiveColor,
-          iconSize: Dimens.iconSize,
-          tooltip: 'Log Out',
-          onPressed: () => logoutOnTap!(),
-        )
-            : const SizedBox(height: 0),
+        SizedBox(
+          width: 40,
+          child: IconButton(onPressed: (){}, icon: LineIcon.search(
+            color: AppColors.buttonColor,
+          )),
+        ), SizedBox(
+          width: 40,
+          child: IconButton(onPressed: (){}, icon: LineIcon.heart(
+            color: AppColors.buttonColor,
+          )),
+        ), SizedBox(
+          width: 40,
+          child: IconButton(onPressed: (){}, icon: LineIcon.shoppingBag(
+            color: AppColors.buttonColor,
+          )),
+        ),
+        SizedBox(
+          width: 10,
+        ),
       ],
     );
   }

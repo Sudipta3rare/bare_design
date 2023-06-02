@@ -4,11 +4,14 @@ import 'package:bare_design/utils/appColors.dart';
 import 'package:bottom_bar_matu/bottom_bar/bottom_bar_bubble.dart';
 import 'package:bottom_bar_matu/bottom_bar_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:line_icons/line_icon.dart';
 
 import '../../../utils/dimens.dart';
 import '../../../utils/themes.dart';
-import '../../components/applicaiton_bar.dart';
+
+
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -98,7 +101,13 @@ class DashboardPage extends StatelessWidget {
                      children: [
                        Padding(
                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                         child: Text("Product Type",style: Styles().p2TextStyle(color: AppColors.accentColor),),
+                         child: GestureDetector(
+
+                             onTap:(
+                             ){
+                               Get.toNamed('/productList');
+                             },
+                             child: Text("Product Type",style: Styles().p2TextStyle(color: AppColors.accentColor),)),
                        )
                      ],)
                    ],),
