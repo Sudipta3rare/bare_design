@@ -70,43 +70,42 @@ class DashboardPage extends StatelessWidget {
     sigmaX: 1.0,
     sigmaY: 1.0,
     ),
-        child: ListView(
-          shrinkWrap: true,
+        child: Column(
+
           children:  [
             _drawerHeader(context),
-           ListView.builder(
-             shrinkWrap: true,
-             itemCount: 1,
-             itemBuilder: (context,int index) {
-               return  Card(
-                 color: AppColors.scaffoldColor,
-                 child: ExpansionTile(title: Text("Categories", ),
+           Expanded(
+             child: ListView.builder(
+               // shrinkWrap: true,
+               itemCount: 10,
+               itemBuilder: (context,int index) {
+                 return  Card(
+                   color: AppColors.scaffoldColor,
+                   child: ExpansionTile(title: Text("Categories $index", ),
 
-                 textColor: AppColors.paragraphColor,
-                 backgroundColor: AppColors.shadowColor,
-                 collapsedTextColor: AppColors.paragraphColor,
-                 iconColor: AppColors.paragraphColor,
-                 childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                 children: [
-                   ExpansionTile(title: Text("Sub-Category"),
-                     textColor: AppColors.paragraphColor,
-                     backgroundColor: AppColors.scaffoldColor,
-                     collapsedTextColor: AppColors.paragraphColor,
-                     iconColor: AppColors.paragraphColor,
-                   collapsedIconColor: AppColors.paragraphColor,
+                   textColor: AppColors.paragraphColor,
+                   backgroundColor: AppColors.shadowColor,
+                   collapsedTextColor: AppColors.paragraphColor,
+                   iconColor: AppColors.paragraphColor,
+                   childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                    children: [
-                     Padding(
-                       padding: EdgeInsets.symmetric(vertical: 8.0),
-                       child: Text("Product Type",style: Styles().p2TextStyle(color: AppColors.accentColor),),
-                     )
-                   ],)
-                 ],),
-               );
-             }
+                     ExpansionTile(title: Text("Sub-Category"),
+                       textColor: AppColors.paragraphColor,
+                       backgroundColor: AppColors.scaffoldColor,
+                       collapsedTextColor: AppColors.paragraphColor,
+                       iconColor: AppColors.paragraphColor,
+                     collapsedIconColor: AppColors.paragraphColor,
+                     children: [
+                       Padding(
+                         padding: EdgeInsets.symmetric(vertical: 8.0),
+                         child: Text("Product Type",style: Styles().p2TextStyle(color: AppColors.accentColor),),
+                       )
+                     ],)
+                   ],),
+                 );
+               }
+             ),
            ),
-            ListTile(
-              title: Text("Test1"),
-            )
           ],
         ),
       )),
