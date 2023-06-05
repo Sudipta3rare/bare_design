@@ -82,9 +82,10 @@ class SingleProductPage extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: List.generate(5, (index) => Padding(padding: EdgeInsets.all(5), child: Column(
+                      children: List.generate(4, (index) => Padding(padding: EdgeInsets.all(5),
+                        child: Column(
                         children: [
-                          Image.asset("assets/pr1.jpg", height: 150, width: 100,
+                          Image.asset(ctrl.productColors[index], height: 150, width: 100,
                           scale: 0.3,),
                           Text("Product Color", style: TextStyle(color: AppColors.paragraphColor),),
                         ],

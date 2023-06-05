@@ -6,4 +6,11 @@ class SingleProductController extends GetxController{
   final List<String> sizes = ["S","M","L"];
   RxString selectedSize = ''.obs;
   late void Function(String) onSizeSelected;
+
+  final List<String> productColors = [
+    "assets/pr1.jpg",
+    "assets/pr2.jpg",
+    "assets/pr3.jpg",
+    "assets/pr4.jpg",
+  ];
 }
