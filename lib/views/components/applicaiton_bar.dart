@@ -51,11 +51,11 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
       titleTextStyle: titleStyle,
       leading: leading ??
           IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: AppColors.buttonColor,
-            ),
-            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back),
+            color: AppColors.secondaryColor,
+            onPressed: (){
+              Get.back();
+            },
           ),
       centerTitle: true,
       title: titleWidget ??
