@@ -7,6 +7,7 @@ import 'package:bare_design/utils/themes.dart';
 import 'package:bare_design/views/components/applicaiton_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 
@@ -32,9 +33,8 @@ class SingleProductPage extends StatelessWidget {
       
       body: _showBody(context),
 
-
       bottomSheet: _bottomSheetButton(context),
-
+      resizeToAvoidBottomInset: true,
     );
 
   }
@@ -64,41 +64,218 @@ class SingleProductPage extends StatelessWidget {
 
             //Size selection widget
             _sizeSelectionWidget(context, ctrl),
+//colors page
+         ctrl.productColors.isNotEmpty ? _showProductColors(context, ctrl) : SizedBox(height:0),
+
+            _showTabView(context),
+          _showCard(context),
 
 
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor,
 
 
-                borderRadius: BorderRadius.circular(2),
-              ),
-              padding: EdgeInsets.all(8),
-              margin: EdgeInsets.all(5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Available Colours", style: Styles().h4TextStyle(),),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(4, (index) => Padding(padding: EdgeInsets.all(5),
-                        child: Column(
-                        children: [
-                          Image.asset(ctrl.productColors[index], height: 150, width: 100,
-                          scale: 0.3,),
-                          Text("Product Color", style: TextStyle(color: AppColors.paragraphColor),),
-                        ],
-                      ),)),
-                    ),
-                  )
-                ],
-              ),
-            ),
+        _showReview(context,ctrl),
         SizedBox(height: 80,)
           ],
         );
       }
+    );
+ }
+ 
+ Widget _showReview(context,ctrl){
+    return Container(
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(8),
+      color: AppColors.primaryColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Ratings", style: Styles().h4TextStyle(),),
+          ),
+          RatingBar.builder(
+            initialRating: 4,
+            minRating: 1,
+            direction: Axis.horizontal,
+            itemCount: 5,
+            itemSize: 30,
+            itemPadding: EdgeInsets.symmetric(horizontal: 2),
+            itemBuilder: (context, _) => Icon(Icons.star,color:  Colors.amber),
+          onRatingUpdate: (index){
+              ctrl.update();
+          },
+          ),
+        ],
+      )
+    );
+ }
+
+ Widget _showTabView(context) {
+    return GetBuilder<SingleProductController>(
+      builder: (ctrl) {
+        return Card(
+          color: AppColors.primaryColor,
+          child: Column(
+            children: <Widget>[
+              TabBar(
+                indicatorWeight: 1,
+                unselectedLabelColor: AppColors.paragraphColor,
+                indicatorColor: AppColors.buttonColor,
+                labelColor: AppColors.buttonColor,
+                dividerColor: AppColors.buttonColor,
+                controller: ctrl.controller,
+                tabs: ctrl.myTabs
+              ),
+            SizedBox(
+              height: 300,
+              child: TabBarView(
+                  controller: ctrl.controller,
+                  children: <Widget>[
+                    Card(
+                      margin: const EdgeInsets.all(16.0),
+                      child: Text(' ipsum dolor sit amet, consectetur adipiscing elit. Integer vel euismod orci. Sed fermentum velit non sem pellentesque, ac eleifend neque pretium. Sed orci turpis, rutrum at mi eget, interdum aliquam sem. Maecenas sit amet nisi ut lacus ullamcorper elementum et in risus. Aenean iaculis, felis id aliquet vulputate, nisi nulla ullamcorper mauris, sit amet ultrices velit libero sollicitudin justo. Morbi faucibus auctor dapibus. Nam id turpis lectus. Quisque eu sodales lorem. Donec dapibus, velit efficitur sodales pellentesque, felis ligula iaculis diam, ut sagittis nibh diam a justo. Maecenas congue orci erat, in tincidunt nisl sollicitudin eu. Curabitur ante erat, cursus id pharetra a, elementum eget tellus. Morbi et rhoncus nisi. Donec quam mauris, sagittis vel augue vitae, malesuada efficitur purus. Cras eu quam mauris.'
+                      ,
+                        overflow: TextOverflow.clip ,
+                      ),
+
+                    ),
+                    Card(
+                      margin: const EdgeInsets.all(16.0),
+                      child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Net Qty",)
+                              ,Text("1 U", style: TextStyle(color: AppColors.buttonColor, fontWeight: FontWeight.bold),),
+                              Text("Package Containes"),
+                              Text("1 Number. of prodcut",style: TextStyle(color: AppColors.buttonColor, fontWeight: FontWeight.bold)),
+                              Text ("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel euismod orci. Sed fermentum velit non sem pellentesque, ac eleifend neque pretium. Sed orci turpis, rutrum at mi eget, interdum aliquam sem. Maecenas sit amet nisi ut lacus ullamcorper elementum et in risus.",
+                              style:  Styles().p2TextStyle(),
+                              )
+                            ]
+                          )
+                      ),
+                    ),
+                  ],
+                ),
+            ),
+            ],
+          ),
+        );
+      }
+    );
+ }
+
+ Widget _showOurSectrects(context){
+    return Column(
+      children: [
+        ListTile(
+          contentPadding: EdgeInsets.all(5),
+          leading: Image.asset("assets/sa1.png"),
+          title: Text("Fit Research", style:Styles().sH2TextStyle(),),
+        ), ListTile(
+          contentPadding: EdgeInsets.all(5),
+          leading: Image.asset("assets/sa2.png"),
+          title: Text("Designing & Manufacturing", style:Styles().sH2TextStyle(),),
+        ), ListTile(
+          contentPadding: EdgeInsets.all(5),leading: Image.asset("assets/sa3.png"),
+          title: Text("Feedback Driven Approach", style:Styles().sH2TextStyle(),),
+        ), ListTile(
+          contentPadding: EdgeInsets.all(5), leading: Image.asset("assets/sa4.png"),
+          title: Text("We Make In India", style:Styles().sH2TextStyle(),),
+        ),
+      ],
+    );
+ }
+
+Widget _showCard(context){
+    return Card(
+
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+
+              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.check),
+                    Text("Free Shipping", style: Styles().p2TextStyle()),
+                    Icon(Icons.info_outline_rounded, size: 15,)
+                  ],
+                ),
+                SizedBox(width: Get.width/6,),
+                Row(
+                  children: [
+                    Icon(Icons.check),
+                    Text("Return Policies", style: Styles().p2TextStyle()),
+                    Icon(Icons.info_outline_rounded, size: 15,)
+                  ],
+                )
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+
+                  children: [
+                    Icon(Icons.check),
+                    Text("COD Available", style: Styles().p2TextStyle()),
+                    Icon(Icons.info_outline_rounded, size: 15,)
+                  ],
+                ),
+                SizedBox(width: Get.width/6,),
+                Row(
+                  children: [
+                    Icon(Icons.check),
+                    Text("Discreet Packaging", style: Styles().p2TextStyle()),
+                    Icon(Icons.info_outline_rounded, size: 15,)
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+}
+
+ Widget _showProductColors(context, ctrl){
+    return             Container(
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor,
+
+
+        borderRadius: BorderRadius.circular(2),
+      ),
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Available Colours", style: Styles().h4TextStyle(),),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(4, (index) => Padding(padding: EdgeInsets.all(5),
+                child: Column(
+                  children: [
+                    Image.asset(ctrl.productColors[index], height: 150, width: 100,
+                      scale: 0.3,),
+                    Text("Product Color", style: TextStyle(color: AppColors.paragraphColor),),
+                  ],
+                ),)),
+            ),
+          )
+        ],
+      ),
     );
  }
 
