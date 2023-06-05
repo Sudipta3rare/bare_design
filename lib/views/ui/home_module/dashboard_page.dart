@@ -1,11 +1,16 @@
 import 'dart:ui';
 
+import 'package:bare_design/controllers/dashboardController.dart';
 import 'package:bare_design/utils/appColors.dart';
+import 'package:bare_design/views/ui/home_module/pages/account_page.dart';
+import 'package:bare_design/views/ui/home_module/pages/categories_page.dart';
+import 'package:bare_design/views/ui/home_module/pages/home_page.dart';
+import 'package:bare_design/views/ui/home_module/pages/hotOrNot_page.dart';
 import 'package:bottom_bar_matu/bottom_bar/bottom_bar_bubble.dart';
 import 'package:bottom_bar_matu/bottom_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:line_icons/line_icon.dart';
 
 import '../../../utils/dimens.dart';
@@ -13,8 +18,8 @@ import '../../../utils/themes.dart';
 
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
-
+   DashboardPage({Key? key}) : super(key: key);
+DashboardController ctrl = Get.put(DashboardController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +128,12 @@ class DashboardPage extends StatelessWidget {
       bottomNavigationBar: BottomBarBubble(
         height: 60,
         backgroundColor: AppColors.primaryColor,
-        onSelect: (index){},
+        onSelect: (index){
+      ctrl.controller.jumpToPage(index);
+      print(index);
+      ctrl.update();
+
+        },
         color: AppColors.buttonColor,
         items: [
           BottomBarItem(iconData:  Icons.home, label: "Home",),
@@ -133,6 +143,18 @@ class DashboardPage extends StatelessWidget {
         ]
       ) ,
 
+
+
+      body: PageView(
+        controller: ctrl.controller,
+        children: <Widget>[
+         HomePage(),
+         CategoriesPage(),
+          HotPage(),
+        AccountPage(),
+
+        ],
+      ),
 
     );
   }

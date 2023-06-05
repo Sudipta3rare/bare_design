@@ -10,7 +10,7 @@ class AppRoutes {
   AppRoutes._(); //this is to prevent anyone from instantiating this object
   static final routes = [
     GetPage(name: '/', page: () => const SplashPage()),
-    GetPage(name: '/dashboard', page: () => const DashboardPage(),transition: Transition.fade),
+    GetPage(name: '/dashboard', page: () =>  DashboardPage(),transition: Transition.fade),
     GetPage(name: '/productList', page: () => const ProductListPage(),transition: Transition.fade),
     // GetPage(name: '/intro', page: () => const IntroPage()),
     // GetPage(name: '/auth', page: () => const AuthPage()),
