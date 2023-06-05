@@ -21,17 +21,20 @@ class AppThemes {
 
 
   static final ButtonStyle primaryButtonStyle = ElevatedButton.styleFrom(
-    foregroundColor: AppColors.buttonTextColor, backgroundColor: AppColors.secondaryColor,
-    textStyle: Styles().h3TextStyle(),
+    foregroundColor: AppColors.buttonTextColor, backgroundColor: AppColors.buttonColor,
+    // textStyle: Styles().h3TextStyle(),
     shape: const RoundedRectangleBorder(
+
       borderRadius: BorderRadius.all(Radius.circular(5)),
     ),
   );
 
   static final ButtonStyle secondaryButtonStyle = ElevatedButton.styleFrom(
+
     foregroundColor: AppColors.iconActiveColor, backgroundColor: AppColors.primaryColor,
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
+      side: BorderSide(color: AppColors.buttonColor),
+      borderRadius: BorderRadius.all(Radius.circular(5)),
     ),
   );
 

@@ -23,6 +23,7 @@ class Dimens{
   static const EdgeInsets pagePadding1 = EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 20.0);
   static const EdgeInsets bodyPadding = EdgeInsets.only(bottom: 20.0,top: 10.0);
   static const EdgeInsets containerPadding = EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0);
+  static const EdgeInsets textPadding = EdgeInsets.symmetric( vertical: 5.0);
 
 // ..Letter Spacing.. //
 

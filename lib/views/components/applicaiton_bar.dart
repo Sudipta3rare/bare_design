@@ -47,9 +47,9 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return actions != null
         ? AppBar(
-      backgroundColor: backgroundColor,
-      titleTextStyle: titleStyle,
-      leading: leading ??
+            backgroundColor: backgroundColor,
+            titleTextStyle: titleStyle,
+            leading: leading ??
           IconButton(
             icon: Icon(Icons.arrow_back),
             color: AppColors.secondaryColor,

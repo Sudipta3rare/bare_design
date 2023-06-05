@@ -1,3 +1,4 @@
+import 'package:bare_design/controllers/single_product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,5 +14,6 @@ Future<void> main() async {
 void _initController(){
   Get.put<WelcomeController>(WelcomeController());
   Get.lazyPut<ProdcutListController>(() => ProdcutListController(),fenix: true);
+  Get.lazyPut<SingleProductController>(() => SingleProductController(),fenix: true);
   // Get.lazyPut<AuthController>(() => AuthController(), fenix: true);
 }
