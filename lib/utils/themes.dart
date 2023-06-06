@@ -41,10 +41,11 @@ class Styles{
   }
 
 
-  TextStyle sH2TextStyle(){
-    return const TextStyle(
+  TextStyle sH2TextStyle({Color color = AppColors.paragraphColor}){
+    return  TextStyle(
       fontSize: Dimens.sH2Size,
       fontWeight: FontWeight.w400,
+      color: color,
     );
   }
 
@@ -57,7 +58,7 @@ class Styles{
 
   TextStyle p1TextStyle({Color color = AppColors.paragraphColor}){
     return TextStyle(
-      color:  AppColors.primaryColor ,
+      color: color,
       fontSize: Dimens.p1Size,
       fontWeight: FontWeight.w400,
     );

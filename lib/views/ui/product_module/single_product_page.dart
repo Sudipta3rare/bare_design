@@ -71,17 +71,106 @@ class SingleProductPage extends StatelessWidget {
           _showCard(context),
 
 
+          _showSimilarProducts(context,ctrl),
 
+        _showReviewBar(context,ctrl),
 
-        _showReview(context,ctrl),
+        _showCustomerReviews(context, ctrl),
+
         SizedBox(height: 80,)
           ],
         );
       }
     );
  }
+
+ Widget     _showCustomerReviews(context, ctrl){
+    return Container(
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor,
+
+
+          borderRadius: BorderRadius.circular(2),
+        ),
+        padding: EdgeInsets.all(8),
+        margin: EdgeInsets.all(4),
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Reviews (10)", style: Styles().h4TextStyle(), ),
+            ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: (context, index){
+              return Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Reviewer Name"),
+                        Text("4/5", style: Styles().p1TextStyle(color: AppColors.paragraphColor),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 0.0),
+                    child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel euismod orci."),
+                  )
+                ],
+              );
+            },
+                separatorBuilder: (context, index){
+              return
+              Divider(thickness: 2,color: AppColors.buttonColor,);
+                }, itemCount: 4),
+            TextButton(onPressed: (){}, child: Text("View All Reviews", style: Styles().sH2TextStyle(color: AppColors.buttonColor),),)
+          ],
+        )
+    );
+ }
+
+ Widget _showSimilarProducts(context,SingleProductController ctrl){
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor,
+
+
+        borderRadius: BorderRadius.circular(2),
+      ),
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text("Similar Products", style: TextStyle(fontWeight: FontWeight.bold,),),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(4, (index) {
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      Image.asset(ctrl.productColors[index], height: Get.height/4,),
+                      Padding(
+                        padding: Dimens.textPadding,
+                        child: Text("Product Name",),
+                      ),
+                      Text("\$ 120"),
+                    ],
+                  ),
+                );
+              })
+            ),
+          )
+        ],
+      ),
+    );
+ }
  
- Widget _showReview(context,ctrl){
+ Widget _showReviewBar(context,ctrl){
     return Container(
       margin: EdgeInsets.all(5),
       padding: EdgeInsets.all(8),
@@ -95,7 +184,7 @@ class SingleProductPage extends StatelessWidget {
           ),
           RatingBar.builder(
             initialRating: 4,
-            minRating: 1,
+            minRating: 0,
             direction: Axis.horizontal,
             itemCount: 5,
             itemSize: 30,
@@ -105,6 +194,7 @@ class SingleProductPage extends StatelessWidget {
               ctrl.update();
           },
           ),
+          Text("Only Customer who have order the product can rate", style: Styles().p2TextStyle(color: AppColors.buttonColor),),
         ],
       )
     );
@@ -350,8 +440,8 @@ Widget _showCard(context){
                           ctrl.sizes[index],
                           style: Styles().p1TextStyle(
                               color: ctrl.selectedSize.value == ctrl.sizes[index]
-                                  ? Colors.white
-                                  : Colors.blue),
+                                  ? AppColors.primaryColor
+                                  : AppColors.primaryColor),
                         ),
                       ),
                     ),
