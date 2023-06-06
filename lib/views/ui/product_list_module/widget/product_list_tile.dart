@@ -56,7 +56,7 @@ class ProductListTile extends StatelessWidget{
                       padding: EdgeInsets.all(12),
                       child: Text(
                         '\$${product.productPrice}',
-                        style: Styles().p1TextStyle(),
+                        style: Styles().p1TextStyle(color: AppColors.primaryColor),
                       ),
                     ),
                   ],

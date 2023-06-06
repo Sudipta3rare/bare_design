@@ -98,32 +98,29 @@ class SingleProductPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Reviews (10)", style: Styles().h4TextStyle(), ),
-            ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (context, index){
-              return Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Reviewer Name"),
-                        Text("4/5", style: Styles().p1TextStyle(color: AppColors.paragraphColor),)
-                      ],
+            Column(
+              children: List.generate(4, (index) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Reviewer Name"),
+                          Text("4/5", style: Styles().p1TextStyle(color: AppColors.paragraphColor),)
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 0.0),
-                    child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel euismod orci."),
-                  )
-                ],
-              );
-            },
-                separatorBuilder: (context, index){
-              return
-              Divider(thickness: 2,color: AppColors.buttonColor,);
-                }, itemCount: 4),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 0.0),
+                      child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel euismod orci."),
+                    ),
+                    Divider(thickness: 2,color: AppColors.buttonColor,),
+                  ],
+                );
+              }),
+            ),
             TextButton(onPressed: (){}, child: Text("View All Reviews", style: Styles().sH2TextStyle(color: AppColors.buttonColor),),)
           ],
         )

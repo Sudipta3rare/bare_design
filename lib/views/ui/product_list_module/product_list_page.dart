@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../../utils/themes.dart';
+
 import '../../components/applicaiton_bar.dart';
 
 class ProductListPage extends StatelessWidget {
@@ -22,25 +22,67 @@ class ProductListPage extends StatelessWidget {
       ),
 
 
-      body: SafeArea(
-        child: GetBuilder<ProdcutListController>(
+      body: showBody(context),
+    );
+  }
+
+  Widget showBody(context){
+    return SafeArea(
+      child: GetBuilder<ProdcutListController>(
           builder: (ctrl) {
-            return GridView.builder(
-              itemCount: ctrl.productList.length,
-              padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1/1.8,
-              ),
-              itemBuilder: (context, index) {
-                return ProductListTile(
-                 product: ctrl.productList[index],
-                );
-              },
-            );
+            return Column(
+
+                children:[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 10.0,0,2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+
+                        Image.asset("assets/sticker1.png",height: Get.height/18,width: Get.width/3.1,),
+                        Image.asset("assets/sticker2.png",height: Get.height/18,width: Get.width/3.1,),
+                        Image.asset("assets/sticker3.png",height: Get.height/18,width: Get.width/3.1,),
+
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(children: List.generate(ctrl.category.length, (index) => _showCategoryTile(context, ctrl, index)),)),
+
+                  SizedBox(height: 8,),
+                  Expanded(child: grid(context))] );
           }
-        ),
       ),
     );
   }
+ Widget _showCategoryTile(context,ProdcutListController ctrl, index){
+    return Container(
+
+      color: AppColors.primaryColor,
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(10),
+      child: Text(ctrl.category[index]),
+    );
+ }
+ Widget grid(BuildContext context){
+    return GetBuilder<ProdcutListController>(
+        builder: (ctrl) {
+          return GridView.builder(
+            // shrinkWrap: true,
+            itemCount: ctrl.productList.length,
+            padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1/1.8,
+            ),
+            itemBuilder: (context, index) {
+              return ProductListTile(
+                product: ctrl.productList[index],
+              );
+            },
+          );
+        }
+    );
+ }
 }
