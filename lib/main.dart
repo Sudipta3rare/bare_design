@@ -14,7 +14,7 @@ Future<void> main() async {
 }
 void _initController(){
   Get.put<WelcomeController>(WelcomeController());
-  Get.lazyPut<ProdcutListController>(() => ProdcutListController(),fenix: true);
+  Get.lazyPut<ProductListController>(() => ProductListController(),fenix: true);
   Get.lazyPut<SingleProductController>(() => SingleProductController(),fenix: true);
   Get.put<AccountController>(AccountController(),);
   // Get.lazyPut<AuthController>(() => AuthController(), fenix: true);

@@ -28,7 +28,7 @@ class ProductListPage extends StatelessWidget {
 
   Widget showBody(context){
     return SafeArea(
-      child: GetBuilder<ProdcutListController>(
+      child: GetBuilder<ProductListController>(
           builder: (ctrl) {
             return Column(
 
@@ -56,7 +56,7 @@ class ProductListPage extends StatelessWidget {
       ),
     );
   }
- Widget _showCategoryTile(context,ProdcutListController ctrl, index){
+ Widget _showCategoryTile(context,ProductListController ctrl, index){
     return Container(
 
       color: AppColors.primaryColor,
@@ -66,7 +66,7 @@ class ProductListPage extends StatelessWidget {
     );
  }
  Widget grid(BuildContext context){
-    return GetBuilder<ProdcutListController>(
+    return GetBuilder<ProductListController>(
         builder: (ctrl) {
           return GridView.builder(
             // shrinkWrap: true,

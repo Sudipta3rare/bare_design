@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 
 import '../models/product_list_model.dart';
 
-class ProdcutListController extends GetxController{
-  static ProdcutListController to = Get.find();
+class ProductListController extends GetxController{
+  static ProductListController to = Get.find();
   List<String> category =["All","50 OFF", "60 OFF", "Non Padded","Full length","Tees", "Shorts","Activewear"];
   List<ProductListModel> productList = <ProductListModel>[
     ProductListModel(
