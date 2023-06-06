@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:line_icons/line_icon.dart';
-
 import '../../utils/appColors.dart';
-
 import '../../utils/dimens.dart';
-
 
 class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
   const ApplicationBar({
@@ -50,59 +46,69 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
             backgroundColor: backgroundColor,
             titleTextStyle: titleStyle,
             leading: leading ??
-          IconButton(
-            icon: Icon(Icons.arrow_back),
-            color: AppColors.secondaryColor,
-            onPressed: (){
-              Get.back();
-            },
-          ),
-      centerTitle: true,
-      title: titleWidget ??
-          Text(
-            title,
-            style: titleStyle,
-          ),
-      actions: actions,
-      elevation: elevation,
-    )
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  color: AppColors.secondaryColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+            centerTitle: true,
+            title: titleWidget ??
+                Text(
+                  title,
+                  style: titleStyle,
+                ),
+            actions: actions,
+            elevation: elevation,
+          )
         : AppBar(
-      backgroundColor: backgroundColor,
-      leading: leading ??
-          IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-            ),
-            onPressed: () => Get.back(),
-          ),
-      centerTitle: centerTitle!,
-      title: logo ?? titleWidget ??
-          Text(
-            title,
-            style: titleStyle,
-          ),
-      elevation: elevation,
-      actions: [
-        SizedBox(
-          width: 40,
-          child: IconButton(onPressed: (){}, icon: LineIcon.search(
-            color: AppColors.buttonColor,
-          )),
-        ), SizedBox(
-          width: 40,
-          child: IconButton(onPressed: (){}, icon: LineIcon.heart(
-            color: AppColors.buttonColor,
-          )),
-        ), SizedBox(
-          width: 40,
-          child: IconButton(onPressed: (){}, icon: LineIcon.shoppingBag(
-            color: AppColors.buttonColor,
-          )),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-      ],
-    );
+            backgroundColor: backgroundColor,
+            leading: leading ??
+                IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.buttonColor,
+                  ),
+                  onPressed: () => Get.back(),
+                ),
+            centerTitle: centerTitle!,
+            title: logo ??
+                titleWidget ??
+                Text(
+                  title,
+                  style: titleStyle,
+                ),
+            elevation: elevation,
+            actions: [
+              SizedBox(
+                width: 40,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: LineIcon.search(
+                      color: AppColors.buttonColor,
+                    )),
+              ),
+              SizedBox(
+                width: 40,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: LineIcon.heart(
+                      color: AppColors.buttonColor,
+                    )),
+              ),
+              SizedBox(
+                width: 40,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: LineIcon.shoppingBag(
+                      color: AppColors.buttonColor,
+                    )),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          );
   }
 }
