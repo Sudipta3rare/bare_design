@@ -3,9 +3,31 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../../../utils/appColors.dart';
 import '../../../../utils/themes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AccountPage extends StatelessWidget {
-  const AccountPage({super.key});
+
+class AccountPage extends StatefulWidget {
+  @override
+  _AccountPageState createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
+  String fullName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _initPreferences();
+  }
+
+
+  Future<void> _initPreferences() async {
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      fullName = _prefs.getString('fullName') ?? '';
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +46,22 @@ class AccountPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 10.0), // Add the desired right padding value
+                      padding: EdgeInsets.only(left: 10.0),
+                      // Add the desired right padding value
                       child: Text(
-                        "Hi Dear",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        fullName ,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     SizedBox(height: 5),
                     Row(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 10.0), // Add the desired right padding value
-                          child: Text("Test Name", style: TextStyle(fontSize: 15)),
+                          padding: EdgeInsets.only(left: 10.0),
+                          // Add the desired right padding value
+                          child:
+                              Text("Test Name", style: TextStyle(fontSize: 15)),
                         ),
                         SizedBox(width: 5),
                         Icon(Icons.verified, color: Colors.green),
@@ -47,13 +73,12 @@ class AccountPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 Align(
                   alignment: Alignment.centerRight,
                   child: IconButton(
-                    icon: Icon(Icons.edit),
+                    icon: const Icon(Icons.edit),
                     onPressed: () {
-                      // Add your edit icon onPressed logic here
+                      Get.toNamed("/personal_information");
                     },
                   ),
                 ),
@@ -63,8 +88,8 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ExpansionTile(
-            title: ListTile(
-              leading: Icon(Icons.shopping_cart,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.shopping_cart, color: AppColors.buttonColor),
               title: Text(
                 "My Order",
                 style: TextStyle(
@@ -75,10 +100,10 @@ class AccountPage extends StatelessWidget {
             textColor: AppColors.paragraphColor,
             collapsedTextColor: AppColors.paragraphColor,
             iconColor: AppColors.paragraphColor,
-            childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             children: [
               ExpansionTile(
-                title: Text("Sub-Category"),
+                title: const Text("Sub-Category"),
                 textColor: AppColors.paragraphColor,
                 backgroundColor: AppColors.scaffoldColor,
                 collapsedTextColor: AppColors.paragraphColor,
@@ -86,7 +111,7 @@ class AccountPage extends StatelessWidget {
                 collapsedIconColor: AppColors.paragraphColor,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed('/productList');
@@ -106,8 +131,9 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ExpansionTile(
-            title: ListTile(
-              leading: Icon(Icons.thermostat_auto_rounded,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.thermostat_auto_rounded,
+                  color: AppColors.buttonColor),
               title: Text(
                 "Hot or Not",
                 style: TextStyle(
@@ -118,10 +144,10 @@ class AccountPage extends StatelessWidget {
             textColor: AppColors.paragraphColor,
             collapsedTextColor: AppColors.paragraphColor,
             iconColor: AppColors.paragraphColor,
-            childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             children: [
               ExpansionTile(
-                title: Text("Sub-Category"),
+                title: const Text("Sub-Category"),
                 textColor: AppColors.paragraphColor,
                 backgroundColor: AppColors.scaffoldColor,
                 collapsedTextColor: AppColors.paragraphColor,
@@ -129,7 +155,7 @@ class AccountPage extends StatelessWidget {
                 collapsedIconColor: AppColors.paragraphColor,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed('/productList');
@@ -149,8 +175,8 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ExpansionTile(
-            title: ListTile(
-              leading: Icon(Icons.fitness_center,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.fitness_center, color: AppColors.buttonColor),
               title: Text(
                 "Fit Test",
                 style: TextStyle(
@@ -161,10 +187,10 @@ class AccountPage extends StatelessWidget {
             textColor: AppColors.paragraphColor,
             collapsedTextColor: AppColors.paragraphColor,
             iconColor: AppColors.paragraphColor,
-            childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             children: [
               ExpansionTile(
-                title: Text("Sub-Category"),
+                title: const Text("Sub-Category"),
                 textColor: AppColors.paragraphColor,
                 backgroundColor: AppColors.scaffoldColor,
                 collapsedTextColor: AppColors.paragraphColor,
@@ -172,7 +198,7 @@ class AccountPage extends StatelessWidget {
                 collapsedIconColor: AppColors.paragraphColor,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed('/productList');
@@ -192,8 +218,8 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ExpansionTile(
-            title: ListTile(
-              leading: Icon(Icons.wallet,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.wallet, color: AppColors.buttonColor),
               title: Text(
                 "Bank Details",
                 style: TextStyle(
@@ -204,10 +230,10 @@ class AccountPage extends StatelessWidget {
             textColor: AppColors.paragraphColor,
             collapsedTextColor: AppColors.paragraphColor,
             iconColor: AppColors.paragraphColor,
-            childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             children: [
               ExpansionTile(
-                title: Text("Sub-Category"),
+                title: const Text("Sub-Category"),
                 textColor: AppColors.paragraphColor,
                 backgroundColor: AppColors.scaffoldColor,
                 collapsedTextColor: AppColors.paragraphColor,
@@ -215,7 +241,7 @@ class AccountPage extends StatelessWidget {
                 collapsedIconColor: AppColors.paragraphColor,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed('/productList');
@@ -235,8 +261,8 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ExpansionTile(
-            title: ListTile(
-              leading: Icon(Icons.location_on,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.location_on, color: AppColors.buttonColor),
               title: Text(
                 "My Addresses",
                 style: TextStyle(
@@ -247,10 +273,10 @@ class AccountPage extends StatelessWidget {
             textColor: AppColors.paragraphColor,
             collapsedTextColor: AppColors.paragraphColor,
             iconColor: AppColors.paragraphColor,
-            childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             children: [
               ExpansionTile(
-                title: Text("Sub-Category"),
+                title: const Text("Sub-Category"),
                 textColor: AppColors.paragraphColor,
                 backgroundColor: AppColors.scaffoldColor,
                 collapsedTextColor: AppColors.paragraphColor,
@@ -258,7 +284,7 @@ class AccountPage extends StatelessWidget {
                 collapsedIconColor: AppColors.paragraphColor,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed('/productList');
@@ -278,8 +304,8 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ExpansionTile(
-            title: ListTile(
-              leading: Icon(Icons.volume_up,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.volume_up, color: AppColors.buttonColor),
               title: Text(
                 "Refer a friend",
                 style: TextStyle(
@@ -290,10 +316,10 @@ class AccountPage extends StatelessWidget {
             textColor: AppColors.paragraphColor,
             collapsedTextColor: AppColors.paragraphColor,
             iconColor: AppColors.paragraphColor,
-            childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             children: [
               ExpansionTile(
-                title: Text("Sub-Category"),
+                title: const Text("Sub-Category"),
                 textColor: AppColors.paragraphColor,
                 backgroundColor: AppColors.scaffoldColor,
                 collapsedTextColor: AppColors.paragraphColor,
@@ -301,7 +327,7 @@ class AccountPage extends StatelessWidget {
                 collapsedIconColor: AppColors.paragraphColor,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed('/productList');
@@ -321,8 +347,8 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ExpansionTile(
-            title: ListTile(
-              leading: Icon(Icons.card_giftcard,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.card_giftcard, color: AppColors.buttonColor),
               title: Text(
                 "My Coupons",
                 style: TextStyle(
@@ -333,10 +359,10 @@ class AccountPage extends StatelessWidget {
             textColor: AppColors.paragraphColor,
             collapsedTextColor: AppColors.paragraphColor,
             iconColor: AppColors.paragraphColor,
-            childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             children: [
               ExpansionTile(
-                title: Text("Sub-Category"),
+                title: const Text("Sub-Category"),
                 textColor: AppColors.paragraphColor,
                 backgroundColor: AppColors.scaffoldColor,
                 collapsedTextColor: AppColors.paragraphColor,
@@ -344,7 +370,7 @@ class AccountPage extends StatelessWidget {
                 collapsedIconColor: AppColors.paragraphColor,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed('/productList');
@@ -364,8 +390,8 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ExpansionTile(
-            title: ListTile(
-              leading: Icon(Icons.sms,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.sms, color: AppColors.buttonColor),
               title: Text(
                 "Contact Us",
                 style: TextStyle(
@@ -376,10 +402,10 @@ class AccountPage extends StatelessWidget {
             textColor: AppColors.paragraphColor,
             collapsedTextColor: AppColors.paragraphColor,
             iconColor: AppColors.paragraphColor,
-            childrenPadding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             children: [
               ExpansionTile(
-                title: Text("Sub-Category"),
+                title: const Text("Sub-Category"),
                 textColor: AppColors.paragraphColor,
                 backgroundColor: AppColors.scaffoldColor,
                 collapsedTextColor: AppColors.paragraphColor,
@@ -387,7 +413,7 @@ class AccountPage extends StatelessWidget {
                 collapsedIconColor: AppColors.paragraphColor,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed('/productList');
@@ -407,8 +433,8 @@ class AccountPage extends StatelessWidget {
         ),
         Card(
           child: ListTile(
-            title: ListTile(
-              leading: Icon(Icons.logout,color: AppColors.buttonColor),
+            title: const ListTile(
+              leading: Icon(Icons.logout, color: AppColors.buttonColor),
               title: Text(
                 "Logout",
                 style: TextStyle(
