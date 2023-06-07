@@ -13,6 +13,7 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   String fullName = '';
+  String mobileNumber = '';
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _AccountPageState extends State<AccountPage> {
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     setState(() {
       fullName = _prefs.getString('fullName') ?? '';
+      mobileNumber = _prefs.getString('mobileNumber') ?? '';
     });
   }
 
@@ -61,7 +63,7 @@ class _AccountPageState extends State<AccountPage> {
                           padding: EdgeInsets.only(left: 10.0),
                           // Add the desired right padding value
                           child:
-                              Text("Test Name", style: TextStyle(fontSize: 15)),
+                              Text(mobileNumber, style: TextStyle(fontSize: 15)),
                         ),
                         SizedBox(width: 5),
                         Icon(Icons.verified, color: Colors.green),

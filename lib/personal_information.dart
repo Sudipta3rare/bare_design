@@ -20,11 +20,10 @@ class _PersonalInformationState extends State<PersonalInformation> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController dobController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
+  String? selectedGender;
   bool isDataDisplayed = false; // Flag variable to track data display
   late SharedPreferences _prefs;
   bool isEmailValid = true;
-  String? selectedGender;
 
   @override
   void initState() {
@@ -42,12 +41,14 @@ class _PersonalInformationState extends State<PersonalInformation> {
     final dob = _prefs.getString('dob') ?? '';
     final gender = _prefs.getString('gender') ?? '';
 
-    fullNameController.text = fullName;
-    emailController.text = email;
-    passwordController.text = password;
-    mobileNumberController.text = mobileNumber;
-    dobController.text = dob;
-
+    setState(() {
+      fullNameController.text = fullName;
+      emailController.text = email;
+      passwordController.text = password;
+      mobileNumberController.text = mobileNumber;
+      dobController.text = dob;
+      selectedGender = gender; // Set the selected gender value
+    });
   }
 
   @override
@@ -57,13 +58,11 @@ class _PersonalInformationState extends State<PersonalInformation> {
     passwordController.dispose();
     mobileNumberController.dispose();
     dobController.dispose();
-    //genderController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var selectedGender;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const ApplicationBar(
@@ -95,7 +94,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 controller: emailController,
                 decoration: InputDecoration(
@@ -119,7 +119,6 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 },
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
@@ -222,7 +221,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   fillColor: Colors.white,
                   filled: true,
                 ),
-                items: <String>['Male', 'Female', 'Other']
+                items: <String>['Male', 'Female', 'Other','']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -242,6 +241,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   final password = passwordController.text;
                   final mobileNumber = mobileNumberController.text;
                   final dob = dobController.text;
+                  final gender = selectedGender ??
+                      ''; // Use selectedGender if not null, otherwise use an empty string
 
                   // Save the entered values to shared preferences
                   await _prefs.setString('fullName', fullName);
@@ -261,7 +262,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
               },
               style: ButtonStyle(
                 backgroundColor:
-                MaterialStateProperty.all<Color>(AppColors.buttonColor),
+                    MaterialStateProperty.all<Color>(AppColors.buttonColor),
                 padding: MaterialStateProperty.all(
                     const EdgeInsets.fromLTRB(35, 0, 35, 0)),
               ),
@@ -273,7 +274,6 @@ class _PersonalInformationState extends State<PersonalInformation> {
     );
   }
 }
-
 
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
