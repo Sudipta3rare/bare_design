@@ -1,12 +1,14 @@
 import 'package:bare_design/utils/appColors.dart';
 import 'package:bare_design/views/components/applicaiton_bar.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class PersonalInformation extends StatefulWidget {
   const PersonalInformation({Key? key}) : super(key: key);
-
 
   @override
   _PersonalInformationState createState() => _PersonalInformationState();
@@ -21,6 +23,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
   TextEditingController genderController = TextEditingController();
   bool isDataDisplayed = false; // Flag variable to track data display
   late SharedPreferences _prefs;
+  bool isEmailValid = true;
+  String? selectedGender;
 
   @override
   void initState() {
@@ -43,8 +47,9 @@ class _PersonalInformationState extends State<PersonalInformation> {
     passwordController.text = password;
     mobileNumberController.text = mobileNumber;
     dobController.text = dob;
-    genderController.text = gender;
+
   }
+
   @override
   void dispose() {
     fullNameController.dispose();
@@ -52,12 +57,13 @@ class _PersonalInformationState extends State<PersonalInformation> {
     passwordController.dispose();
     mobileNumberController.dispose();
     dobController.dispose();
-    genderController.dispose();
+    //genderController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    var selectedGender;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const ApplicationBar(
@@ -92,7 +98,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
               padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 controller: emailController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Email',
                   labelStyle: TextStyle(color: AppColors.buttonColor),
                   border: OutlineInputBorder(
@@ -103,11 +109,20 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   ),
                   fillColor: Colors.white,
                   filled: true,
+                  errorText: isEmailValid ? null : 'Please enter a valid email',
                 ),
+                keyboardType: TextInputType.emailAddress,
+                onChanged: (value) {
+                  setState(() {
+                    isEmailValid = EmailValidator.validate(value);
+                  });
+                },
               ),
             ),
+
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -126,9 +141,15 @@ class _PersonalInformationState extends State<PersonalInformation> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
                 controller: mobileNumberController,
+                keyboardType: TextInputType.phone,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(10),
+                ],
                 decoration: const InputDecoration(
                   labelText: 'Mobile Number',
                   labelStyle: TextStyle(color: AppColors.buttonColor),
@@ -144,9 +165,27 @@ class _PersonalInformationState extends State<PersonalInformation> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: TextField(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              child: TextFormField(
                 controller: dobController,
+                focusNode: AlwaysDisabledFocusNode(),
+                onTap: () async {
+                  // Show date picker and update the dobController's value
+                  DateTime? selectedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (selectedDate != null) {
+                    String formattedDate =
+                        DateFormat('yyyy-MM-dd').format(selectedDate);
+                    dobController.text =
+                        formattedDate; // Update controller value with selected date
+                  }
+                },
                 decoration: const InputDecoration(
                   labelText: 'Date Of Birth',
                   labelStyle: TextStyle(color: AppColors.buttonColor),
@@ -162,9 +201,15 @@ class _PersonalInformationState extends State<PersonalInformation> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
-              child: TextField(
-                controller: genderController,
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              child: DropdownButtonFormField<String>(
+                value: selectedGender,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedGender = newValue;
+                  });
+                },
                 decoration: const InputDecoration(
                   labelText: 'Gender',
                   labelStyle: TextStyle(color: AppColors.buttonColor),
@@ -177,6 +222,13 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   fillColor: Colors.white,
                   filled: true,
                 ),
+                items: <String>['Male', 'Female', 'Other']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
               ),
             ),
             const SizedBox(
@@ -190,7 +242,6 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   final password = passwordController.text;
                   final mobileNumber = mobileNumberController.text;
                   final dob = dobController.text;
-                  final gender = genderController.text;
 
                   // Save the entered values to shared preferences
                   await _prefs.setString('fullName', fullName);
@@ -198,24 +249,37 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   await _prefs.setString('password', password);
                   await _prefs.setString('mobileNumber', mobileNumber);
                   await _prefs.setString('dob', dob);
-                  await _prefs.setString('gender', gender);
+                  await _prefs.setString('gender', selectedGender ?? '');
 
                   // Set the flag to true to indicate data display
                   setState(() {
                     isDataDisplayed = true;
                   });
+
+                  Get.back();
                 }
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(AppColors.buttonColor),
-                padding: MaterialStateProperty.all(const EdgeInsets.fromLTRB(35, 0, 35, 0)),
+                backgroundColor:
+                MaterialStateProperty.all<Color>(AppColors.buttonColor),
+                padding: MaterialStateProperty.all(
+                    const EdgeInsets.fromLTRB(35, 0, 35, 0)),
               ),
               child: const Text('Save'),
             )
-
           ],
         ),
       ),
     );
   }
+}
+
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
+}
+
+bool isValidEmail(String email) {
+  return EmailValidator.validate(email);
 }
