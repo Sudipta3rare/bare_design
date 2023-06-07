@@ -1,6 +1,8 @@
 
 
+import 'package:bare_design/controllers/cart_controller.dart';
 import 'package:bare_design/controllers/single_product_controller.dart';
+import 'package:bare_design/models/product_list_model.dart';
 import 'package:bare_design/utils/apptheme.dart';
 import 'package:bare_design/utils/dimens.dart';
 import 'package:bare_design/utils/themes.dart';
@@ -14,7 +16,9 @@ import 'package:get/get.dart';
 import '../../../utils/appColors.dart';
 
 class SingleProductPage extends StatelessWidget {
-  const SingleProductPage({super.key});
+   SingleProductPage({super.key, required this.product});
+
+  ProductListModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -467,13 +471,19 @@ Widget _showCard(context){
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: Get.width/2.4 ,
-            child: ElevatedButton(onPressed: (){}, child: Text("Add TO Cart"),
-              style: AppThemes.secondaryButtonStyle,),
-          ),
+        GetBuilder<CartController>(
+              builder: (crtCtrl) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: Get.width/2.4 ,
+                    child: ElevatedButton(onPressed: (){crtCtrl.addToCart(product);
+                      Get.toNamed("/cartPage");}, child: Text("Add TO Cart"),
+                      style: AppThemes.secondaryButtonStyle,),
+                  ),
+                );
+              }
+
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

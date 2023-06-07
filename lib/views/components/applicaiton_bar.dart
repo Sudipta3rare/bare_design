@@ -100,7 +100,10 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
               SizedBox(
                 width: 40,
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed("/cartPage");
+
+                    },
                     icon: LineIcon.shoppingBag(
                       color: AppColors.buttonColor,
                     )),

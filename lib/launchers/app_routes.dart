@@ -2,6 +2,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
 import '../personal_information.dart';
+import '../views/ui/cart_module/cart_page.dart';
 import '../views/ui/home_module/dashboard_page.dart';
 import '../views/ui/product_list_module/product_list_page.dart';
 import '../views/ui/splash_module/splash_screen.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
     GetPage(name: '/dashboard', page: () =>  DashboardPage(),transition: Transition.fade),
     GetPage(name: '/productList', page: () => const ProductListPage(),transition: Transition.fade),
     GetPage(name: '/personal_information', page: () => PersonalInformation(),transition: Transition.fade),
+    GetPage(name: '/cartPage', page: () => CartPage(),transition: Transition.fade),
     // GetPage(name: '/intro', page: () => const IntroPage()),
     // GetPage(name: '/auth', page: () => const AuthPage()),
     // GetPage(name: '/login', page: () => const LoginPage()),

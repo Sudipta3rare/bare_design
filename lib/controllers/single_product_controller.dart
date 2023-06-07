@@ -1,3 +1,5 @@
+import 'package:bare_design/controllers/product_list_controller.dart';
+import 'package:bare_design/models/product_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

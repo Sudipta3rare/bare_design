@@ -1,9 +1,12 @@
+import 'package:bare_design/views/ui/product_module/single_product_page.dart';
 import 'package:get/get.dart';
 
 import '../models/product_list_model.dart';
 
 class ProductListController extends GetxController{
   static ProductListController to = Get.find();
+
+
   List<String> category =["All","50 OFF", "60 OFF", "Non Padded","Full length","Tees", "Shorts","Activewear"];
   List<ProductListModel> productList = <ProductListModel>[
     ProductListModel(
@@ -48,4 +51,10 @@ class ProductListController extends GetxController{
       productPrice: "120"
     ),
   ];
+
+
+  void goToSingleProductPage(ProductListModel product){
+
+    Get.to(SingleProductPage(product: product));
+  }
 }

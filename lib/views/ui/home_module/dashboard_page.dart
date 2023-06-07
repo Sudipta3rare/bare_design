@@ -62,7 +62,9 @@ DashboardController ctrl = Get.put(DashboardController());
           )),
         ), SizedBox(
             width: 40,
-          child: IconButton(onPressed: (){}, icon: LineIcon.shoppingBag(
+          child: IconButton(onPressed: (){
+            Get.toNamed("/cartPage");
+          }, icon: LineIcon.shoppingBag(
             color: AppColors.buttonColor,
           )),
         ),

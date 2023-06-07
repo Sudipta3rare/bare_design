@@ -3,7 +3,7 @@ import 'package:bare_design/utils/appColors.dart';
 import 'package:bare_design/views/ui/product_list_module/widget/product_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:line_icons/line_icons.dart';
+
 
 
 import '../../components/applicaiton_bar.dart';
