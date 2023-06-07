@@ -92,7 +92,9 @@ class ApplicationBar extends StatelessWidget implements PreferredSizeWidget {
               SizedBox(
                 width: 40,
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed("/wishlistPage");
+                    },
                     icon: LineIcon.heart(
                       color: AppColors.buttonColor,
                     )),

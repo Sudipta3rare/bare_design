@@ -1,4 +1,5 @@
 import 'package:bare_design/controllers/product_list_controller.dart';
+import 'package:bare_design/controllers/wishlist_controller.dart';
 import 'package:bare_design/models/product_list_model.dart';
 import 'package:bare_design/views/ui/product_module/single_product_page.dart';
 import 'package:flutter/material.dart';
@@ -89,8 +90,20 @@ class ProductListTile extends StatelessWidget{
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // love icon
-                          LineIcon.heartbeat(
-                            color: AppColors.buttonColor,
+                         GetBuilder<WishlistController>(
+                            builder: (wishlistCtrl) {
+                              return GestureDetector(
+                                onTap: (){
+                                  wishlistCtrl.addToWishlist(product);
+                                  // wishlistCtrl.update();
+                                  print(wishlistCtrl.wishlistProducts.length);
+                                  Get.toNamed("/wishlistPage");
+                                },
+                                child: LineIcon.heartbeat(
+                                  color: AppColors.buttonColor,
+                                ),
+                              );
+                            }
                           ),
 
                         SizedBox(width: 10,),

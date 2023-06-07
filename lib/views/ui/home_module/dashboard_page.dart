@@ -57,7 +57,9 @@ DashboardController ctrl = Get.put(DashboardController());
           )),
         ), SizedBox(
             width: 40,
-          child: IconButton(onPressed: (){}, icon: LineIcon.heart(
+          child: IconButton(onPressed: (){
+            Get.toNamed("/wishlistPage");
+          }, icon: LineIcon.heart(
             color: AppColors.buttonColor,
           )),
         ), SizedBox(
