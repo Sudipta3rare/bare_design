@@ -1,5 +1,6 @@
 import 'package:bare_design/utils/appColors.dart';
 import 'package:bare_design/utils/dimens.dart';
+import 'package:bare_design/views/components/carousel_slider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,13 +47,9 @@ class HomePage extends StatelessWidget {
 
   Widget _buildPageLayout(context) {
     return Column(children: [
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children:
-          List.generate(4, (index) => Image.asset(productColors[index], width: Get.width,height: Get.height/2,)),
-        ),
-      ),
+      CustomCarouselSlider(items: productColors, height: Get.height/2,),
+      
+
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
 

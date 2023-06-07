@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 
 
 import '../../../utils/appColors.dart';
+import '../../components/carousel_slider.dart';
 
 class SingleProductPage extends StatelessWidget {
    SingleProductPage({super.key, required this.product});
@@ -28,7 +29,7 @@ class SingleProductPage extends StatelessWidget {
         title: "Product Page",
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          color: AppColors.secondaryColor,
+          color: AppColors.buttonColor,
           onPressed: (){
             Get.back();
           },
@@ -42,7 +43,7 @@ class SingleProductPage extends StatelessWidget {
     );
 
   }
-  
+
  Widget _showBody(context){
     return GetBuilder<SingleProductController>(
       builder: (ctrl) {
@@ -57,8 +58,8 @@ class SingleProductPage extends StatelessWidget {
               title: Row(
               mainAxisAlignment:  MainAxisAlignment.spaceBetween,
               children: [
-                Text("Product Name", style: Styles().h2TextStyle(),),
-                Text(" \$ 120", style: Styles().h2TextStyle(),),
+                Text(product.productName, style: Styles().h2TextStyle(),),
+                Text(" \$ ${product.productPrice}", style: Styles().h2TextStyle(),),
               ],
             ),
             trailing: Icon(Icons.favorite,
@@ -224,7 +225,7 @@ class SingleProductPage extends StatelessWidget {
                   children: <Widget>[
                     Card(
                       margin: const EdgeInsets.all(16.0),
-                      child: Text(' ipsum dolor sit amet, consectetur adipiscing elit. Integer vel euismod orci. Sed fermentum velit non sem pellentesque, ac eleifend neque pretium. Sed orci turpis, rutrum at mi eget, interdum aliquam sem. Maecenas sit amet nisi ut lacus ullamcorper elementum et in risus. Aenean iaculis, felis id aliquet vulputate, nisi nulla ullamcorper mauris, sit amet ultrices velit libero sollicitudin justo. Morbi faucibus auctor dapibus. Nam id turpis lectus. Quisque eu sodales lorem. Donec dapibus, velit efficitur sodales pellentesque, felis ligula iaculis diam, ut sagittis nibh diam a justo. Maecenas congue orci erat, in tincidunt nisl sollicitudin eu. Curabitur ante erat, cursus id pharetra a, elementum eget tellus. Morbi et rhoncus nisi. Donec quam mauris, sagittis vel augue vitae, malesuada efficitur purus. Cras eu quam mauris.'
+                      child: Text(product.productAbout
                       ,
                         overflow: TextOverflow.clip ,
                       ),
@@ -373,28 +374,14 @@ Widget _showCard(context){
  Widget _carousalWidget(context){
     return Stack(
         children: [
-          CarouselSlider(items: [
-          Image.asset("assets/pr2.jpg",),
-          Image.asset("assets/pr1.jpg",),
-          Image.asset("assets/pr3.jpg",),
-          Image.asset("assets/pr4.jpg",),
-          Image.asset("assets/pr5.jpg",),
-        ], options: CarouselOptions(
-          height: 400,
-          aspectRatio: 16/9,
-          viewportFraction: 0.8,
-          initialPage: 0,
-          enableInfiniteScroll: true,
-          reverse: false,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 3),
-          autoPlayAnimationDuration: Duration(milliseconds: 900),
-          autoPlayCurve: Curves.fastOutSlowIn,
-          enlargeCenterPage: true,
-          enlargeFactor: 0.23,
-          // onPageChanged: callbackFunction,
-          scrollDirection: Axis.horizontal,
-        )),
+          CustomCarouselSlider(items: [
+            "assets/pr2.jpg",
+            "assets/pr3.jpg",
+            "assets/pr4.jpg",
+            "assets/pr8.jpg",
+            "assets/pr7.jpg",
+          ],
+          height: Get.height,),
           Positioned(
               left: Get.width*0.9,
               child: Container(
