@@ -93,15 +93,14 @@ class ProductListTile extends StatelessWidget{
                          GetBuilder<WishlistController>(
                             builder: (wishlistCtrl) {
                               return GestureDetector(
+
                                 onTap: (){
-                                  wishlistCtrl.addToWishlist(product);
-                                  // wishlistCtrl.update();
-                                  print(wishlistCtrl.wishlistProducts.length);
-                                  Get.toNamed("/wishlistPage");
+                                  wishlistCtrl.productInWishlist(product) ? wishlistCtrl.removeWishlist(product): wishlistCtrl.addToWishlist(product);
+                                  wishlistCtrl.update();
                                 },
-                                child: LineIcon.heartbeat(
-                                  color: AppColors.buttonColor,
-                                ),
+                                child: wishlistCtrl.productInWishlist(product)? Icon(Icons.favorite,
+                                  color: AppColors.buttonColor,)
+                                    : Icon(Icons.favorite_outline_sharp, color: AppColors.buttonColor,),
                               );
                             }
                           ),

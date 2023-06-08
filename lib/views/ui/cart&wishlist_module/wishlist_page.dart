@@ -66,7 +66,7 @@ class WishlistPage extends StatelessWidget {
                                 children: [
                                    Positioned(
                                   bottom: 60,
-                              child: IconButton(onPressed: (){controller.decreaseItemQuantity(product);}, icon:   Icon(Icons.cancel_outlined, color: AppColors.buttonColor,),)),
+                              child: IconButton(onPressed: (){controller.removeWishlist(product);}, icon:   Icon(Icons.cancel_outlined, color: AppColors.buttonColor,),)),
                                   Positioned(
                                     bottom: 10,
                                     child: Container(

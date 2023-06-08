@@ -2,6 +2,7 @@
 
 import 'package:bare_design/controllers/cart_controller.dart';
 import 'package:bare_design/controllers/single_product_controller.dart';
+import 'package:bare_design/controllers/wishlist_controller.dart';
 import 'package:bare_design/models/product_list_model.dart';
 import 'package:bare_design/utils/apptheme.dart';
 import 'package:bare_design/utils/dimens.dart';
@@ -53,17 +54,28 @@ class SingleProductPage extends StatelessWidget {
             _carousalWidget(context),
 
 
-            ListTile(
-              tileColor: AppColors.primaryColor,
-              title: Row(
-              mainAxisAlignment:  MainAxisAlignment.spaceBetween,
-              children: [
-                Text(product.productName, style: Styles().h2TextStyle(),),
-                Text(" \$ ${product.productPrice}", style: Styles().h2TextStyle(),),
-              ],
-            ),
-            trailing: Icon(Icons.favorite,
-            color: AppColors.buttonColor,),
+            GetBuilder<WishlistController>(
+              builder: (wlCtrl) {
+                return ListTile(
+                  tileColor: AppColors.primaryColor,
+                  title: Row(
+                  mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(product.productName, style: Styles().h2TextStyle(),),
+                    Text(" \$ ${product.productPrice}", style: Styles().h2TextStyle(),),
+                  ],
+                ),
+                trailing: IconButton(
+                  onPressed: (){
+                    wlCtrl.productInWishlist(product) ? wlCtrl.removeWishlist(product): wlCtrl.addToWishlist(product);
+                    wlCtrl.update();
+                  },
+                  icon: wlCtrl.productInWishlist(product)? Icon(Icons.favorite,
+                  color: AppColors.buttonColor,)
+                  : Icon(Icons.favorite_outline_sharp, color: AppColors.buttonColor,),
+                ),
+                );
+              }
             ),
 
 

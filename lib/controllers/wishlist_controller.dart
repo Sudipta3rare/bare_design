@@ -12,9 +12,11 @@ class WishlistController extends GetxController{
     }
   }
   bool get isEmptyWishlist => wishlistProducts.isEmpty;
+  bool productInWishlist(ProductListModel product){
+    return wishlistProducts.contains(product);
+  }
 
-
-  void decreaseItemQuantity(ProductListModel product) {
+  void removeWishlist(ProductListModel product) {
 
 
       wishlistProducts.remove(product);
