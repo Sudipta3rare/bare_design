@@ -1,3 +1,4 @@
+import 'package:bare_design/controllers/account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -12,23 +13,23 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  String fullName = '';
-  String mobileNumber = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _initPreferences();
-  }
-
-
-  Future<void> _initPreferences() async {
-    final SharedPreferences _prefs = await SharedPreferences.getInstance();
-    setState(() {
-      fullName = _prefs.getString('fullName') ?? '';
-      mobileNumber = _prefs.getString('mobileNumber') ?? '';
-    });
-  }
+  // String fullName = '';
+  // String mobileNumber = '';
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _initPreferences();
+  // }
+  //
+  //
+  // Future<void> _initPreferences() async {
+  //   final SharedPreferences _prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     fullName = _prefs.getString('fullName') ?? '';
+  //     mobileNumber = _prefs.getString('mobileNumber') ?? '';
+  //   });
+  // }
 
 
   @override
@@ -39,53 +40,57 @@ class _AccountPageState extends State<AccountPage> {
         SizedBox(
           width: double.infinity,
           height: 100,
-          child: Card(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+          child: GetBuilder<AccountController>(
+            builder: (ctrl) {
+              return Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      // Add the desired right padding value
-                      child: Text(
-                        fullName ,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Row(
+                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(left: 10.0),
                           // Add the desired right padding value
-                          child:
-                              Text(mobileNumber, style: TextStyle(fontSize: 15)),
+                          child: Text(
+                            ctrl.fullNmae ,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        SizedBox(width: 5),
-                        Icon(Icons.verified, color: Colors.green),
-                        Text(
-                          "Verified",
-                          style: TextStyle(color: Colors.green),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 10.0),
+                              // Add the desired right padding value
+                              child:
+                                  Text(ctrl.mobile, style: TextStyle(fontSize: 15)),
+                            ),
+                            SizedBox(width: 5),
+                            Icon(Icons.verified, color: Colors.green),
+                            Text(
+                              "Verified",
+                              style: TextStyle(color: Colors.green),
+                            ),
+                          ],
                         ),
                       ],
                     ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          Get.toNamed("/personal_information");
+                        },
+                      ),
+                    ),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      Get.toNamed("/personal_information");
-                    },
-                  ),
-                ),
-              ],
-            ),
+              );
+            }
           ),
         ),
         Card(

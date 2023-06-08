@@ -1,3 +1,4 @@
+import 'package:bare_design/controllers/account_controller.dart';
 import 'package:bare_design/utils/appColors.dart';
 import 'package:bare_design/views/components/applicaiton_bar.dart';
 import 'package:email_validator/email_validator.dart';
@@ -233,40 +234,46 @@ class _PersonalInformationState extends State<PersonalInformation> {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              onPressed: () async {
-                if (!isDataDisplayed) {
-                  final fullName = fullNameController.text;
-                  final email = emailController.text;
-                  final password = passwordController.text;
-                  final mobileNumber = mobileNumberController.text;
-                  final dob = dobController.text;
-                  final gender = selectedGender ??
-                      ''; // Use selectedGender if not null, otherwise use an empty string
+            GetBuilder<AccountController>(
+              builder: (ctrl) {
+                return ElevatedButton(
+                  onPressed: () async {
+                    if (!isDataDisplayed) {
+                      final fullName = fullNameController.text;
+                      final email = emailController.text;
+                      final password = passwordController.text;
+                      final mobileNumber = mobileNumberController.text;
+                      final dob = dobController.text;
+                      final gender = selectedGender ??
+                          ''; // Use selectedGender if not null, otherwise use an empty string
 
-                  // Save the entered values to shared preferences
-                  await _prefs.setString('fullName', fullName);
-                  await _prefs.setString('email', email);
-                  await _prefs.setString('password', password);
-                  await _prefs.setString('mobileNumber', mobileNumber);
-                  await _prefs.setString('dob', dob);
-                  await _prefs.setString('gender', selectedGender ?? '');
+                      // Save the entered values to shared preferences
+                      await _prefs.setString('fullName', fullName);
+                      await _prefs.setString('email', email);
+                      await _prefs.setString('password', password);
+                      await _prefs.setString('mobileNumber', mobileNumber);
+                      await _prefs.setString('dob', dob);
+                      await _prefs.setString('gender', selectedGender ?? '');
+                        ctrl.fullNmae = fullName;
+                        ctrl.mobile = mobileNumber;
+                        ctrl.update();
+                      // Set the flag to true to indicate data display
+                      setState(() {
+                        isDataDisplayed = true;
+                      });
 
-                  // Set the flag to true to indicate data display
-                  setState(() {
-                    isDataDisplayed = true;
-                  });
-
-                  Get.back();
-                }
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(AppColors.buttonColor),
-                padding: MaterialStateProperty.all(
-                    const EdgeInsets.fromLTRB(35, 0, 35, 0)),
-              ),
-              child: const Text('Save'),
+                      Get.back();
+                    }
+                  },
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(AppColors.buttonColor),
+                    padding: MaterialStateProperty.all(
+                        const EdgeInsets.fromLTRB(35, 0, 35, 0)),
+                  ),
+                  child: const Text('Save'),
+                );
+              }
             )
           ],
         ),
