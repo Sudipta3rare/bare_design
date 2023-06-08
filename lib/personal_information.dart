@@ -165,8 +165,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextFormField(
                 controller: dobController,
                 focusNode: AlwaysDisabledFocusNode(),
@@ -177,13 +176,26 @@ class _PersonalInformationState extends State<PersonalInformation> {
                     initialDate: DateTime.now(),
                     firstDate: DateTime(1900),
                     lastDate: DateTime.now(),
+                    builder: (BuildContext context, Widget? child) {
+                      return Theme(
+                        data: ThemeData.light().copyWith(
+                          colorScheme: const ColorScheme.light(
+                            primary: AppColors.buttonColor, // Update primary color to pink
+                          ),
+                          textButtonTheme: TextButtonThemeData(
+                            style: TextButton.styleFrom(
+                              primary: AppColors.buttonColor, // Update text button color to pink
+                            ),
+                          ),
+                        ),
+                        child: child!,
+                      );
+                    },
                   );
 
                   if (selectedDate != null) {
-                    String formattedDate =
-                        DateFormat('yyyy-MM-dd').format(selectedDate);
-                    dobController.text =
-                        formattedDate; // Update controller value with selected date
+                    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+                    dobController.text = formattedDate; // Update controller value with selected date
                   }
                 },
                 decoration: const InputDecoration(
@@ -200,6 +212,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 ),
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
@@ -244,19 +257,19 @@ class _PersonalInformationState extends State<PersonalInformation> {
                       final password = passwordController.text;
                       final mobileNumber = mobileNumberController.text;
                       final dob = dobController.text;
-                      final gender = selectedGender ??
-                          ''; // Use selectedGender if not null, otherwise use an empty string
-
+                      /*final gender = selectedGender ?? '';
+                      // Use selectedGender if not null, otherwise use an empty string*/
                       // Save the entered values to shared preferences
+
                       await _prefs.setString('fullName', fullName);
                       await _prefs.setString('email', email);
                       await _prefs.setString('password', password);
                       await _prefs.setString('mobileNumber', mobileNumber);
                       await _prefs.setString('dob', dob);
                       await _prefs.setString('gender', selectedGender ?? '');
-                        ctrl.fullNmae = fullName;
-                        ctrl.mobile = mobileNumber;
-                        ctrl.update();
+                      ctrl.fullName = fullName;
+                      ctrl.mobile = mobileNumber;
+                      ctrl.update();
                       // Set the flag to true to indicate data display
                       setState(() {
                         isDataDisplayed = true;

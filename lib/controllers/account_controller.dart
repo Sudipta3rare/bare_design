@@ -7,8 +7,8 @@ import '../models/account_model.dart';
 class AccountController extends GetxController{
   static AccountController to = Get.find();
 
-  String fullNmae ='';
-  String mobile='';
+  String fullName = '';
+  String mobile = '';
 
   //
   // final savedFeild = GetStorage();

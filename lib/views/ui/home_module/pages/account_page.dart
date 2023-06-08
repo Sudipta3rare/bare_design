@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../../../utils/appColors.dart';
 import '../../../../utils/themes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 class AccountPage extends StatefulWidget {
@@ -13,24 +12,6 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  // String fullName = '';
-  // String mobileNumber = '';
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _initPreferences();
-  // }
-  //
-  //
-  // Future<void> _initPreferences() async {
-  //   final SharedPreferences _prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     fullName = _prefs.getString('fullName') ?? '';
-  //     mobileNumber = _prefs.getString('mobileNumber') ?? '';
-  //   });
-  // }
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +35,7 @@ class _AccountPageState extends State<AccountPage> {
                           padding: EdgeInsets.only(left: 10.0),
                           // Add the desired right padding value
                           child: Text(
-                            ctrl.fullNmae ,
+                            ctrl.fullName ,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
