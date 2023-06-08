@@ -254,7 +254,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                       await _prefs.setString('mobileNumber', mobileNumber);
                       await _prefs.setString('dob', dob);
                       await _prefs.setString('gender', selectedGender ?? '');
-                        ctrl.fullNmae = fullName;
+                        ctrl.fullName = fullName;
                         ctrl.mobile = mobileNumber;
                         ctrl.update();
                       // Set the flag to true to indicate data display

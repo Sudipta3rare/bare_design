@@ -1,14 +1,26 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/account_model.dart';
 
 class AccountController extends GetxController{
   static AccountController to = Get.find();
 
-  String fullNmae ='';
-  String mobile='';
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    _prefs = await SharedPreferences.getInstance();
+    fullName = _prefs.getString('fullName') ?? 'Hi dear';
+    mobile = _prefs.getString('mobileNumber') ?? '';
+  }
+
+  late SharedPreferences _prefs;
+  late String fullName ;
+ late String mobile='';
+
+
 
   //
   // final savedFeild = GetStorage();

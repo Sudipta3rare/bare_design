@@ -54,7 +54,7 @@ class _AccountPageState extends State<AccountPage> {
                           padding: EdgeInsets.only(left: 10.0),
                           // Add the desired right padding value
                           child: Text(
-                            ctrl.fullNmae ,
+                            ctrl.fullName ,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
