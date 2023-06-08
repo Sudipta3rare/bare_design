@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bare_design/controllers/account_controller.dart';
 import 'package:bare_design/controllers/category_controller.dart';
 import 'package:bare_design/controllers/dashboardController.dart';
 import 'package:bare_design/utils/appColors.dart';
@@ -218,13 +219,17 @@ DashboardController ctrl = Get.put(DashboardController());
                 ),
               ),
               SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text('user', style: Styles().p1TextStyle()),
-                    Text('test@example.com',style:  Styles().p2TextStyle(color: AppColors.primaryColor),),
-                  ],
+                child: GetBuilder<AccountController>(
+                  builder: (accCtrl) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(accCtrl.fullName, style: Styles().p1TextStyle()),
+                        Text(accCtrl.mobile, style:  Styles().p2TextStyle(color: AppColors.primaryColor),),
+                      ],
+                    );
+                  }
                 ),
               ),
             ],
