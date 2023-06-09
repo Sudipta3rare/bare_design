@@ -17,8 +17,8 @@ class AccountController extends GetxController{
   }
 
   late SharedPreferences _prefs;
-  late String fullName ;
- late String mobile='';
+  late String fullName;
+  late String mobile;
 
 
 
