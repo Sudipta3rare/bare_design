@@ -65,9 +65,7 @@ class CartPage extends StatelessWidget {
                             color: AppColors.buttonColor,
                           ),
                         ),
-                        GetBuilder<CartController>(
-                          builder: (CartController controller) {
-                            return AnimatedSwitcherWrapper(
+                      AnimatedSwitcherWrapper(
                               child: Text(
                                 '${controller.cartProducts[index].quantity}',
                                 key: ValueKey<int>(
@@ -78,8 +76,7 @@ class CartPage extends StatelessWidget {
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                            );
-                          },
+
                         ),
                         IconButton(
 

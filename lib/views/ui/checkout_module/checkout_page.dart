@@ -190,12 +190,58 @@ Widget _mobilenumberForm(){
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(onPressed: (){controller.decreaseItemQuantity(product);},
-                          icon:   Icon(Icons.cancel_outlined, color: AppColors.buttonColor,),),
-                         TextButton(onPressed: (){
-                           Get.to(SingleProductPage(product: product));
-                         }, child: Text("View Product")
-                             , style: AppThemes.secondaryButtonStyle,),
+                        Container(
+                          margin: EdgeInsets.only(left:8, right: 8),
+                          decoration: BoxDecoration(
+                            color: AppColors.scaffoldColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+
+                              IconButton(
+                                splashRadius: 10.0,
+                                onPressed: () =>
+                                    controller.decreaseItemQuantity(product),
+                                icon: const Icon(
+                                  Icons.remove,
+                                  color: AppColors.buttonColor,
+                                ),
+                              ),
+                              AnimatedSwitcherWrapper(
+                                child: Text(
+                                  '${controller.cartProducts[index].quantity}',
+                                  key: ValueKey<int>(
+                                    controller.cartProducts[index].quantity,
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+
+                              ),
+                              IconButton(
+
+                                splashRadius: 10.0,
+                                onPressed: () =>
+                                    controller.increaseItemQuantity(product),
+                                icon: const Icon(Icons.add, color: AppColors.buttonColor,),
+                              ),
+                            ],
+                          ),
+                        ),
+                         Container(
+                           margin: EdgeInsets.only(left:8, right: 8),
+
+                           child: TextButton(onPressed: (){
+                             Get.to(SingleProductPage(product: product));
+                           }, child: Text("View Product")
+                               , style: AppThemes.secondaryButtonStyle,),
+                         ),
                       ],
                     ),
                    ],
