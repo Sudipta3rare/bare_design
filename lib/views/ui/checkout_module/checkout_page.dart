@@ -199,41 +199,41 @@ Widget _mobilenumberForm(){
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
 
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
+     mainAxisSize: MainAxisSize.min,
+     children: [
 
-                              IconButton(
-                                splashRadius: 10.0,
-                                onPressed: () =>
-                                    controller.decreaseItemQuantity(product),
-                                icon: const Icon(
-                                  Icons.remove,
-                                  color: AppColors.buttonColor,
-                                ),
-                              ),
-                              AnimatedSwitcherWrapper(
-                                child: Text(
-                                  '${controller.cartProducts[index].quantity}',
-                                  key: ValueKey<int>(
-                                    controller.cartProducts[index].quantity,
-                                  ),
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
+     IconButton(
+     splashRadius: 10.0,
+     onPressed: () =>
+     controller.decreaseItemQuantity(product),
+     icon: const Icon(
+     Icons.remove,
+     color: AppColors.buttonColor,
+     ),
+     ),
+     AnimatedSwitcherWrapper(
+     child: Text(
+     '${controller.cartProducts[index].quantity}',
+     key: ValueKey<int>(
+     controller.cartProducts[index].quantity,
+     ),
+     style: const TextStyle(
+     fontSize: 18,
+     fontWeight: FontWeight.w700,
+     ),
+     ),
 
-                              ),
-                              IconButton(
+     ),
+     IconButton(
 
-                                splashRadius: 10.0,
-                                onPressed: () =>
-                                    controller.increaseItemQuantity(product),
-                                icon: const Icon(Icons.add, color: AppColors.buttonColor,),
-                              ),
-                            ],
-                          ),
-                        ),
+     splashRadius: 10.0,
+     onPressed: () =>
+     controller.increaseItemQuantity(product),
+     icon: const Icon(Icons.add, color: AppColors.buttonColor,),
+     ),
+     ],
+     ),
+     ),
                          Container(
                            margin: EdgeInsets.only(left:8, right: 8),
 

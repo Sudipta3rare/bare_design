@@ -6,6 +6,7 @@ import 'package:bare_design/controllers/wishlist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'controllers/my_orders_controller.dart';
 import 'controllers/product_list_controller.dart';
 import 'controllers/welcome_controller.dart';
 import 'launchers/mainApp.dart';
@@ -22,6 +23,7 @@ void _initController(){
   Get.put<CartController>(CartController());
   Get.put<CategoryController>(CategoryController());
   Get.put<WishlistController>(WishlistController());
+  Get.put<MyOrderController>(MyOrderController());
   Get.put<AccountController>(AccountController(),);
   // Get.lazyPut<AuthController>(() => AuthController(), fenix: true);
 }

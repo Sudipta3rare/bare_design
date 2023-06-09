@@ -1,4 +1,5 @@
 import 'package:bare_design/controllers/account_controller.dart';
+import 'package:bare_design/views/ui/checkout_module/myOrders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -75,8 +76,11 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ),
         Card(
-          child: ExpansionTile(
-            title: const ListTile(
+          child:GestureDetector(
+            onTap: (){
+              Get.to(MyOrdersPage());
+            },
+            child: ListTile(
               leading: Icon(Icons.shopping_cart, color: AppColors.buttonColor),
               title: Text(
                 "My Order",
@@ -84,37 +88,8 @@ class _AccountPageState extends State<AccountPage> {
                   color: AppColors.paragraphColor,
                 ),
               ),
+              trailing: Icon(Icons.arrow_right, color: AppColors.buttonColor,),
             ),
-            textColor: AppColors.paragraphColor,
-            collapsedTextColor: AppColors.paragraphColor,
-            iconColor: AppColors.paragraphColor,
-            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-            children: [
-              ExpansionTile(
-                title: const Text("Sub-Category"),
-                textColor: AppColors.paragraphColor,
-                backgroundColor: AppColors.scaffoldColor,
-                collapsedTextColor: AppColors.paragraphColor,
-                iconColor: AppColors.paragraphColor,
-                collapsedIconColor: AppColors.paragraphColor,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.toNamed('/productList');
-                      },
-                      child: Text(
-                        "Product Type",
-                        style: Styles().p2TextStyle(
-                          color: AppColors.accentColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
           ),
         ),
         Card(
