@@ -65,15 +65,15 @@ class SingleProductPage extends StatelessWidget {
                     Text(" \$ ${product.productPrice}", style: Styles().h2TextStyle(),),
                   ],
                 ),
-                trailing: IconButton(
-                  onPressed: (){
-                    wlCtrl.productInWishlist(product) ? wlCtrl.removeWishlist(product): wlCtrl.addToWishlist(product);
-                    wlCtrl.update();
-                  },
-                  icon: wlCtrl.productInWishlist(product)? Icon(Icons.favorite,
-                  color: AppColors.buttonColor,)
-                  : Icon(Icons.favorite_outline_sharp, color: AppColors.buttonColor,),
-                ),
+                // trailing: IconButton(
+                //   onPressed: (){
+                //     wlCtrl.productInWishlist(product) ? wlCtrl.removeWishlist(product): wlCtrl.addToWishlist(product);
+                //     wlCtrl.update();
+                //   },
+                //   icon: wlCtrl.productInWishlist(product)? Icon(Icons.favorite,
+                //   color: AppColors.buttonColor,)
+                //   : Icon(Icons.favorite_outline_sharp, color: AppColors.buttonColor,),
+                // ),
                 );
               }
             ),
@@ -467,34 +467,46 @@ Widget _showCard(context){
   }
 
   Widget _bottomSheetButton(context){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        GetBuilder<CartController>(
-              builder: (crtCtrl) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: Get.width/2.4 ,
-                    child: ElevatedButton(onPressed: (){crtCtrl.addToCart(product);
-                      Get.toNamed("/cartPage");}, child: Text("Add TO Cart"),
-                      style: AppThemes.secondaryButtonStyle,),
-                  ),
-                );
-              }
+    return Flexible(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GetBuilder<WishlistController>(
+            builder: (wlCtrl) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  // width: Get.width/2.4,
+                  child: ElevatedButton(onPressed: (){
+              wlCtrl.productInWishlist(product) ? wlCtrl.removeWishlist(product): wlCtrl.addToWishlist(product);
+              wlCtrl.update();
+        }, child: wlCtrl.productInWishlist(product)? Icon(Icons.favorite,
+                color: AppColors.buttonColor,)
+                : Icon(Icons.favorite_outline_sharp, color: AppColors.buttonColor,),
 
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: Get.width/2.1,
-            child: ElevatedButton(onPressed: (){}, child: Text("Buy Now"),
 
-              style: AppThemes.primaryButtonStyle,),
+                    style: AppThemes.secondaryButtonStyle,),
+                ),
+              );
+            }
           ),
-        ),
+          GetBuilder<CartController>(
+                builder: (crtCtrl) {
+                  return Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(onPressed: (){crtCtrl.addToCart(product);
+                        Get.toNamed("/cartPage");}, child: Text("Add TO Cart"),
+                        style: AppThemes.primaryButtonStyle,),
+                    ),
+                  );
+                }
+
+          ),
 
 
-      ],);
+
+        ],),
+    );
   }
 }

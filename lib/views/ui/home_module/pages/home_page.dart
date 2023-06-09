@@ -1,11 +1,13 @@
 import 'package:bare_design/utils/appColors.dart';
 import 'package:bare_design/utils/dimens.dart';
 import 'package:bare_design/views/components/carousel_slider.dart';
+import 'package:bare_design/views/ui/product_list_module/widget/product_list_tile.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/themes.dart';
+import '../../product_list_module/product_list_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -30,8 +32,13 @@ class HomePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: List.generate(
                 9,
-                (index) => SizedBox(
-                    height: 120, child: headerCategory(context, index))),
+                (index) => GestureDetector(
+                  onTap:(){
+                    Get.to(ProductListPage());
+                  },
+                  child: SizedBox(
+                      height: 120, child: headerCategory(context, index)),
+                )),
           ),
         ),
       ),
@@ -46,99 +53,102 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildPageLayout(context) {
-    return Column(children: [
-      CustomCarouselSlider(items: productColors, height: Get.height/2,),
-      
+    return GestureDetector(
+      onTap:(){Get.to(ProductListPage());},
+      child: Column(children: [
+        CustomCarouselSlider(items: productColors, height: Get.height/2,),
 
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
 
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
 
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  "assets/sticker1.png",
+                  height: Get.height / 18,
+                  width: Get.width / 3.3,
+                ),
+                Image.asset(
+                  "assets/sticker2.png",
+                  height: Get.height / 18,
+                  width: Get.width / 3.3,
+                ),
+                Image.asset(
+                  "assets/sticker3.png",
+                  height: Get.height / 18,
+                  width: Get.width / 3.3,
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Image.asset(
+            "assets/bra1.jpg",
+            width: Get.width,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+
+          child: Image.asset(
+            "assets/bra2.jpg",
+            width: Get.width,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+
+          color: AppColors.primaryColor,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset(
-                "assets/sticker1.png",
-                height: Get.height / 18,
-                width: Get.width / 3.3,
+              Text(
+                "Trending Products",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              Image.asset(
-                "assets/sticker2.png",
-                height: Get.height / 18,
-                width: Get.width / 3.3,
-              ),
-              Image.asset(
-                "assets/sticker3.png",
-                height: Get.height / 18,
-                width: Get.width / 3.3,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    children: List.generate(3, (index) {
+                  return Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          productColors[index],
+                          height: Get.height / 4,
+                        ),
+                        Padding(
+                          padding: Dimens.textPadding,
+                          child: Text(
+                            "Product Name",
+                          ),
+                        ),
+                        Text("\$ 120"),
+                      ],
+                    ),
+                  );
+                }
+                ),
+                ),
               ),
             ],
           ),
         ),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Image.asset(
-          "assets/bra1.jpg",
-          width: Get.width,
-          fit: BoxFit.cover,
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-
-        child: Image.asset(
-          "assets/bra2.jpg",
-          width: Get.width,
-          fit: BoxFit.cover,
-        ),
-      ),
-      Container(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-
-        color: AppColors.primaryColor,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              "Trending Products",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                  children: List.generate(3, (index) {
-                return Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        productColors[index],
-                        height: Get.height / 4,
-                      ),
-                      Padding(
-                        padding: Dimens.textPadding,
-                        child: Text(
-                          "Product Name",
-                        ),
-                      ),
-                      Text("\$ 120"),
-                    ],
-                  ),
-                );
-              }
-              ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ]);
+      ]),
+    );
   }
 
   Widget headerCategory(context, index) {

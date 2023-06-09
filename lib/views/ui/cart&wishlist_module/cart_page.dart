@@ -3,6 +3,7 @@ import 'package:bare_design/models/product_list_model.dart';
 import 'package:bare_design/utils/apptheme.dart';
 import 'package:bare_design/views/components/applicaiton_bar.dart';
 import 'package:bare_design/views/ui/cart&wishlist_module/widgets/cart&wishllist_widgets.dart';
+import 'package:bare_design/views/ui/checkout_module/checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -145,7 +146,9 @@ class CartPage extends StatelessWidget {
             padding: const EdgeInsets.only(left: 30, right: 30, bottom: 20),
             child: ElevatedButton(
               style: AppThemes.primaryButtonStyle,
-              onPressed: controller.isEmptyCart ? null : () {},
+              onPressed: controller.isEmptyCart ? null : () {
+                Get.to(CheckoutPage());
+              },
               child: const Text("Buy Now"),
             ),
           ),

@@ -210,7 +210,7 @@ DashboardController ctrl = Get.put(DashboardController());
                 width: 35,
                 height: 35,
                 decoration: BoxDecoration(shape: BoxShape.circle),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   backgroundColor: AppColors.paragraphColor,
                   child: Icon(
                     Icons.check,
